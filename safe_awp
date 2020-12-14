@@ -1,0 +1,27 @@
+  var a = false;
+  var path = ["Rage", "General", "General", "Key assignment", "Force safe point"];
+  function cm()
+{
+  var local = Entity.GetLocalPlayer();
+  var weapon = Entity.GetWeapon(local);
+  var weaponclass = Entity.GetClassName(weapon);
+
+  if (weaponclass == "CWeaponAWP") 
+  {
+    var safepoint = UI.GetValue(path)
+
+    if (!safepoint)
+    {
+      UI.ToggleHotkey(path)
+      a = true
+    }
+  }
+   else
+   if (a)
+    {
+    UI.ToggleHotkey(path)
+    a = false;
+    }
+}
+
+  Cheat.RegisterCallback("CreateMove", "cm")
