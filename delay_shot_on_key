@@ -1,0 +1,28 @@
+UI.AddHotkey(["Rage", "General", "General", "Key assignment"], "Wait for on shot key", "delay shot");
+var last_shot_time = [];
+
+function uwu() {
+    if (!UI.GetValue(["Rage", "General", "General", "Key assignment", "Wait for on shot key"])) return;
+    var local = Entity.GetLocalPlayer();
+    if (!Entity.IsAlive(local)) return;
+    var enemies = Entity.GetEnemies();
+    for (var i = 0; i < enemies.length; i++) {
+        var enemy = enemies[i];
+        var dif = Globals.Tickcount() - last_shot_time[enemy];
+        var has_shot = dif >= 0 && dif <= 12;
+        if (!has_shot) Ragebot.IgnoreTarget(enemy)
+    }
+}
+
+function owo() {
+    var shooter = Entity.GetEntityFromUserID(Event.GetInt("userid"));
+    last_shot_time[shooter] = Globals.Tickcount();
+}
+
+function update() {
+    var entity = Entity.GetEntityFromUserID(Event.GetInt("userid"));
+    if (entity == Entity.GetLocalPlayer()) last_shot_time = []
+}
+Cheat.RegisterCallback("weapon_fire", "owo");
+Cheat.RegisterCallback("player_connect_full", "update");
+Cheat.RegisterCallback("CreateMove", "uwu")
