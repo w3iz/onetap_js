@@ -1,0 +1,15 @@
+var variable = 0;
+
+function fakelag() {
+
+    var bruh = function (bruh1, bruh2) {
+
+            return bruh1 < bruh2
+
+        }
+
+        bruh(variable, 15 - 1) ? (UserCMD.Choke(), variable++) : variable < 14 + 8 ? (UserCMD.Send(), variable++) : variable = 0;
+
+    }
+
+Cheat.RegisterCallback("CreateMove", "fakelag");
